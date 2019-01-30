@@ -692,11 +692,13 @@ var jsCalendar = (function(){
             this._elements.bodyCols[i].textContent = (text < 10 ? prefix + text : text);
 
             // If date is selected
-            if (this._selected.indexOf(month.days[i].getTime()) >= 0) {
-                this._elements.bodyCols[i].className = 'jsCalendar-selected';
+            var _this_time = month.days[i].getTime();
+            var relClass = Date.now() - _this_time >= 0 ? 'gone' : 'upcoming'
+            if (this._selected.indexOf(_this_time) >= 0) {
+                this._elements.bodyCols[i].className = 'jsCalendar-selected ' + relClass;
             }
             else {
-                this._elements.bodyCols[i].removeAttribute('class');
+                this._elements.bodyCols[i].className = relClass;
             }
         }
 
